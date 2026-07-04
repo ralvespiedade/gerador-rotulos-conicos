@@ -1,0 +1,20 @@
+{
+  "name": "geradorrotulosconicos",
+  "version": "1.0.0",
+  "description": "Projeto desenvolvido pela RKP3D.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "tsx src/app.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "tsx": "^4.23.0",
+    "typescript": "^6.0.3"
+  }
+}
