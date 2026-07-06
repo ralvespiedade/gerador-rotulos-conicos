@@ -7,11 +7,6 @@ const meuBalde: ConeDimensions = {
   height: 35,
 }
 
-const geratriz: number = calculateGeratriz(35,2)
+const geratriz = calculateGeratriz(meuBalde)
 
-const mensagem:string = "Estou gostando muito desse aprendizado, amigão!"
-
-
-console.log(mensagem)
-console.log(meuBalde)
-console.log(`A geratriz do seu balde é ${geratriz}.`)
+console.log(`Geratriz: ${geratriz}`)

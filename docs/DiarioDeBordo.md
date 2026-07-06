@@ -166,4 +166,174 @@ Ao voltar a programar, muitos conceitos começaram a retornar naturalmente, traz
 
 🚀 Próximo passo:
 Transformar matemática em software.
+
+# Diário de Bordo — 05/07/2026
+
+## Objetivo do dia
+
+Dar início à implementação da parte matemática do Gerador de Rótulos Cônicos, estruturando o projeto para realizar o primeiro cálculo geométrico: a geratriz do tronco de cone.
+
+---
+
+## O que foi desenvolvido
+
+### Estrutura do projeto
+
+Organizei melhor as pastas do projeto e criei a estrutura inicial para separar as responsabilidades:
+
+- `geometry/`
+- `models/`
+- `utils/`
+
+Também foi criada a interface `ConeDimensions`, responsável por representar as dimensões de um tronco de cone.
+
+---
+
+### Primeira Interface do projeto
+
+Foi criada a interface:
+
+```ts
+ConeDimensions
 ```
+
+Ela define que qualquer objeto que represente um tronco de cone deve possuir:
+
+- diâmetro superior;
+- diâmetro inferior;
+- altura.
+
+Foi muito interessante compreender que uma interface funciona como um contrato entre o código e o TypeScript.
+
+---
+
+### Primeiro cálculo geométrico
+
+Implementei a função responsável por calcular a geratriz utilizando o Teorema de Pitágoras.
+
+Inicialmente, a função recebia como parâmetros:
+
+- altura;
+- diferença entre os raios.
+
+Essa foi a primeira função matemática do projeto.
+
+Também foi muito legal relembrar conceitos estudados há muitos anos, principalmente o Teorema de Pitágoras.
+
+---
+
+## Conceitos aprendidos
+
+Durante a implementação da geratriz, revisitei um conceito clássico da matemática:
+
+> A soma dos quadrados dos catetos é igual ao quadrado da hipotenusa.
+
+Foi muito gratificante perceber que aquele conteúdo estudado na escola possui aplicação direta em um problema real da RKP3D.
+
+---
+
+## Sensação do dia
+
+Hoje foi o dia em que o projeto deixou de ser apenas um "Hello, World!" e realizou seu primeiro cálculo geométrico.
+
+Foi uma sensação muito boa perceber que programação e matemática começam a caminhar juntas para resolver um problema real.
+```
+# Diário de Bordo — 06/07/2026
+
+## Objetivo do dia
+
+Refatorar a função de cálculo da geratriz para deixá-la mais intuitiva, compreender melhor conceitos do TypeScript e evoluir a arquitetura do projeto.
+
+---
+
+## O que foi desenvolvido
+
+### Refatoração da função `calculateGeratriz`
+
+A função passou por uma importante evolução.
+
+Antes, ela recebia dois parâmetros:
+
+```ts
+calculateGeratriz(altura, diferencaRaios)
+```
+
+Após a refatoração, ela passou a receber diretamente um objeto do tipo:
+
+```ts
+ConeDimensions
+```
+
+Agora a própria função é responsável por:
+
+- calcular o raio superior;
+- calcular o raio inferior;
+- calcular a diferença entre os raios;
+- aplicar o Teorema de Pitágoras;
+- retornar a geratriz.
+
+Essa alteração tornou a função muito mais elegante e fácil de utilizar.
+
+---
+
+### Refatoração do `app.ts`
+
+O código da aplicação ficou mais simples.
+
+Agora basta criar um objeto representando o balde e passá-lo para a função:
+
+```ts
+calculateGeratriz(meuBalde)
+```
+
+Percebi como esconder detalhes internos da implementação deixa o código muito mais legível.
+
+---
+
+## Conceitos aprendidos
+
+### `import type`
+
+Hoje finalmente compreendi um conceito que estava bastante abstrato.
+
+Entendi que interfaces existem apenas durante o desenvolvimento.
+
+Elas funcionam como uma ficha técnica que o TypeScript utiliza para conferir se tudo está correto.
+
+Quando o código é transformado em JavaScript, essa ficha desaparece.
+
+Por isso utilizamos:
+
+```ts
+import type { ConeDimensions } from "./models/ConeDimensions.js"
+```
+
+Já funções realmente existem quando o programa está sendo executado, portanto continuam sendo importadas normalmente.
+
+Foi um dos conceitos mais interessantes aprendidos até agora.
+
+---
+
+### Separação de responsabilidades
+
+Também compreendi um princípio importante de arquitetura.
+
+Uma função deve possuir apenas uma responsabilidade.
+
+Percebi que `calculateGeratriz()` deve apenas calcular e retornar um valor.
+
+A responsabilidade de exibir o resultado pertence ao `app.ts`.
+
+Esse pequeno detalhe tornou muito clara a importância de separar responsabilidades dentro do projeto.
+
+---
+
+## Sensação do dia
+
+Hoje tive uma das melhores sensações desde que retomamos os estudos.
+
+Consegui realizar praticamente toda a refatoração sozinho.
+
+Foi muito gratificante perceber que vários conceitos começaram a fazer sentido ao mesmo tempo.
+
+Também fiquei muito feliz em perceber que estou aprendendo não apenas a escrever código, mas principalmente a entender o motivo pelo qual ele é escrito dessa forma.
