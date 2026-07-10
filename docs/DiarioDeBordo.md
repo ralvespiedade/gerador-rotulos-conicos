@@ -337,3 +337,114 @@ Consegui realizar praticamente toda a refatoração sozinho.
 Foi muito gratificante perceber que vários conceitos começaram a fazer sentido ao mesmo tempo.
 
 Também fiquei muito feliz em perceber que estou aprendendo não apenas a escrever código, mas principalmente a entender o motivo pelo qual ele é escrito dessa forma.
+
+## 08/07/2026 — Quando o código deu lugar à matemática
+
+Hoje foi um dia diferente.
+
+Nenhuma nova função foi implementada.
+Nenhuma interface foi criada.
+Nenhum commit foi realizado.
+
+Mesmo assim, considero este um dos dias mais importantes desde o início do projeto.
+
+Percebemos que o próximo desafio não era mais programar, mas compreender profundamente a geometria da planificação de um tronco de cone.
+
+Ao invés de procurar fórmulas prontas, decidimos seguir um caminho diferente: descobrir a matemática por trás do problema.
+
+Durante a conversa, utilizamos diversas analogias para construir esse entendimento:
+
+- A gota d'água escorrendo pela parede do balde para representar a geratriz.
+- Um barbante envolvendo a boca do balde para compreender por que o comprimento do arco permanece inalterado após a planificação.
+- Um compasso desenhando um círculo para visualizar a geratriz como raio da planificação.
+- Uma pizza para entender que a planificação corresponde apenas a uma fração de uma circunferência completa.
+
+Foi nesse momento que compreendi uma ideia extremamente importante:
+
+> A superfície do tronco de cone pode ser aberta sem esticar nem comprimir o material. As distâncias sobre essa superfície permanecem exatamente as mesmas.
+
+Essa percepção explicou por que o comprimento da circunferência superior do balde transforma-se exatamente no comprimento do arco externo da planificação.
+
+Ao final do dia, compreendi também que a circunferência construída pela geratriz não representa a peça final, mas apenas uma referência matemática para descobrir qual fração dela será utilizada.
+
+Hoje não programei.
+
+Hoje aprendi a enxergar o problema.
+
+---
+
+## Aprendizados
+
+- Antes de programar, é preciso compreender o problema.
+- Nem toda evolução de um projeto acontece escrevendo código.
+- Uma boa analogia pode ensinar mais do que uma fórmula decorada.
+- A matemática do projeto começou a deixar de ser um conjunto de fórmulas e passou a fazer sentido visualmente.
+
+## 💡 Insight do Dia
+
+"A matemática não é um conjunto de fórmulas; ela é uma forma de descrever aquilo que conseguimos enxergar."
+---
+
+## Próximos passos
+
+- Descobrir matematicamente os raios interno e externo da planificação.
+- Calcular o ângulo do setor circular.
+- Transformar toda essa matemática em código TypeScript.
+
+## 09/07/2026 — Quando comecei a descobrir as fórmulas
+
+Hoje aconteceu algo que dificilmente esquecerei.
+
+Ao invés de receber uma fórmula pronta, comecei a construir meus próprios caminhos para chegar até ela.
+
+Enquanto refletia sobre a geometria do cone completo, surgiu uma ideia:
+
+"Será que consigo descobrir a altura do cone utilizando uma regra de três?"
+
+A proposta era simples.
+
+Sabendo que:
+
+- em 35 mm de altura o raio varia 1,5 mm;
+
+seria possível descobrir qual altura seria necessária para que esse raio chegasse até zero.
+
+Inicialmente imaginei tratar essa relação como inversamente proporcional, por estar raciocinando da base em direção ao vértice do cone.
+
+Durante a discussão, compreendi que, matematicamente, trata-se de uma relação linear decrescente.
+
+Apesar do ajuste na nomenclatura, o raciocínio geométrico estava correto.
+
+A partir dessa altura reconstruída do cone completo, tornou-se possível calcular sua geratriz utilizando o Teorema de Pitágoras.
+
+Foi extremamente gratificante perceber que havia encontrado um segundo caminho para chegar exatamente ao mesmo resultado obtido anteriormente utilizando semelhança de triângulos.
+
+Mais importante do que encontrar a resposta foi perceber que eu mesmo era capaz de reconstruir a matemática do problema.
+
+Essa foi uma das maiores vitórias desde o início do projeto.
+
+---
+
+## Aprendizados
+
+- Existem diferentes caminhos matemáticos para resolver o mesmo problema.
+- Entender a geometria vale mais do que decorar fórmulas.
+- Um algoritmo sólido nasce de um raciocínio sólido.
+- Questionar e propor soluções faz parte do desenvolvimento de software.
+
+---
+## 💡 Insight do Dia
+
+"Uma boa solução nasce quando entendemos o problema tão bem que conseguimos reinventar o caminho até a resposta."
+
+## Uma frase que marcou o dia
+
+> "Hoje não aprendi apenas uma fórmula. Descobri que consigo construí-la."
+
+---
+
+## Próximos passos
+
+- Determinar matematicamente os raios interno e externo da planificação.
+- Implementar os cálculos em TypeScript.
+- Criar o modelo que representará a planificação completa do rótulo.
