@@ -1,5 +1,5 @@
 export interface ConeDimensions {
-  topDiameter: number;
-  bottomDiameter: number;
-  height: number;
+  height: Number,
+  radius: Number,
+  geratrix: Number
 }

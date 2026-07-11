@@ -1,12 +1,12 @@
-import type { ConeDimensions } from "./models/ConeDimensions.js"
-import { calculateGeratriz } from "./geometry/calculations.js"
+import type { TrunkDimensions } from "./models/TrunkDimensions.js"
+import { calculateFullConeGeratrix } from "./geometry/calculations.js"
 
-const meuBalde: ConeDimensions = {
-  topDiameter: 35,
+const meuBalde: TrunkDimensions = {
+  topDiameter: 35.5,
   bottomDiameter: 32,
   height: 35,
 }
 
-const geratriz = calculateGeratriz(meuBalde)
+const cone = calculateFullConeGeratrix(meuBalde)
 
-console.log(`Geratriz: ${geratriz}`)
+console.log(`A altura do cone é: ${cone.height}`)
