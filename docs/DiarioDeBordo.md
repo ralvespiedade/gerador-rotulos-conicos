@@ -448,3 +448,79 @@ Essa foi uma das maiores vitórias desde o início do projeto.
 - Determinar matematicamente os raios interno e externo da planificação.
 - Implementar os cálculos em TypeScript.
 - Criar o modelo que representará a planificação completa do rótulo.
+
+## 11/07/2026 — Reconstruindo o Cone Completo
+
+Hoje foi um daqueles dias em que o projeto amadureceu.
+
+Ao invés de apenas fazer o código funcionar, o foco passou a ser tornar a implementação mais próxima da geometria real do problema.
+
+Começamos revisando a função responsável por reconstruir o cone completo a partir das dimensões do tronco.
+
+Durante essa revisão percebemos alguns pontos importantes:
+
+- O algoritmo deveria funcionar independentemente da orientação do tronco de cone.
+- A diferença entre os raios deveria ser sempre positiva.
+- O raio utilizado no cálculo da geratriz do cone completo deveria ser sempre o maior raio do tronco.
+- A função passou a retornar um objeto representando o cone completo, ao invés de apenas um número.
+
+Essa mudança tornou o código muito mais expressivo.
+
+Antes, a função retornava apenas a geratriz.
+
+Agora ela devolve um novo objeto contendo:
+
+- altura do cone completo;
+- raio da base do cone completo;
+- geratriz.
+
+Durante esse processo compreendi um conceito muito importante de desenvolvimento de software:
+
+> Uma função não precisa devolver apenas um valor. Ela pode devolver um objeto inteiro representando um novo conceito do domínio.
+
+Essa ideia fez muito sentido utilizando a analogia da linha de produção.
+
+Cada função recebe uma "caixa" de informações, realiza seu trabalho e entrega outra "caixa" organizada para a próxima etapa do algoritmo.
+
+Também reorganizamos a nomenclatura do projeto.
+
+A interface anteriormente chamada `ConeDimensions` passou a representar especificamente o cone completo, enquanto o objeto utilizado como entrada passou a representar explicitamente um tronco de cone.
+
+Essa separação tornou o domínio muito mais claro e prepara o projeto para as próximas etapas.
+
+Ao final do dia, a função já era capaz de reconstruir matematicamente o cone completo a partir de um tronco de cone utilizando:
+
+- regra de três;
+- Teorema de Pitágoras.
+
+Mais do que implementar uma função, foi um exercício de transformar a matemática compreendida nos últimos dias em um algoritmo limpo, legível e preparado para crescer.
+
+---
+
+## Aprendizados
+
+- Bons nomes tornam o código mais fácil de compreender.
+- Um algoritmo robusto deve funcionar mesmo quando a entrada muda de orientação.
+- Objetos permitem transportar várias informações relacionadas de maneira organizada.
+- Programar é modelar conceitos do mundo real.
+
+---
+
+## Insight do Dia
+
+> "Uma boa função não entrega apenas um resultado; ela entrega um novo conhecimento sobre o problema."
+
+---
+
+## Próximos passos
+
+Agora que o cone completo pode ser reconstruído matematicamente, o próximo desafio será calcular a planificação.
+
+Para isso precisaremos descobrir:
+
+- o raio interno da planificação;
+- o raio externo;
+- o ângulo do setor circular.
+
+Essas três informações representarão completamente a geometria do rótulo plano e abrirão caminho para a geração automática do SVG.
+

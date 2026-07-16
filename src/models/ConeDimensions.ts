@@ -1,5 +1,6 @@
 export interface ConeDimensions {
-  height: Number,
-  radius: Number,
-  geratrix: Number
+  height: number,
+  radius: number,
+  geratrix: number,
+  trunkGeratrix: number
 }
