@@ -1,6 +1,7 @@
 import type { TrunkDimensions } from "./models/TrunkDimensions.js"
 import { calculateCone } from "./geometry/cone.js"
 import { calculateDevelopment } from "./geometry/development.js"
+import { generateSVG } from "./svg/generator.js"
 
 const trunk: TrunkDimensions = {
   topDiameter: 35.5,
@@ -11,6 +12,8 @@ const trunk: TrunkDimensions = {
 const cone = calculateCone(trunk)
 
 const development = calculateDevelopment(cone)
+
+const svg = generateSVG(development)
 
 console.log('=================================')
 console.log()
@@ -29,3 +32,4 @@ console.log()
 console.log(`Inner Radius...... ${development.internalRadius.toFixed(2)}mm`)
 console.log(`Outer Radius...... ${development.externalRadius.toFixed(2)}mm`)
 console.log(`Angle............. ${development.angle.toFixed(2)}°`)
+console.log(svg)
