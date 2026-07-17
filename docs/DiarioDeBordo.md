@@ -524,3 +524,114 @@ Para isso precisaremos descobrir:
 
 Essas três informações representarão completamente a geometria do rótulo plano e abrirão caminho para a geração automática do SVG.
 
+# 16/07/2026
+
+## Objetivo
+
+Concluir a etapa matemática responsável pelo cálculo da planificação do tronco de cone, preparando o projeto para a futura geração do SVG.
+
+---
+
+## Evoluções realizadas
+
+### Implementação do Cone Development
+
+Foi implementada a função responsável por calcular a geometria da planificação do tronco de cone.
+
+A partir das dimensões do cone completo calculadas anteriormente, o sistema agora determina:
+
+- Raio interno da planificação;
+- Raio externo da planificação;
+- Ângulo do setor circular.
+
+Essas três informações descrevem completamente a geometria necessária para desenhar a planificação.
+
+---
+
+### Descoberta matemática
+
+Durante o desenvolvimento foi consolidado o raciocínio geométrico utilizado para determinar o ângulo do setor circular.
+
+Partindo da relação entre:
+
+- comprimento do arco da planificação;
+- circunferência completa gerada pela geratriz;
+
+foi deduzida a expressão:
+
+θ = (Comprimento do Arco × 360°) / Circunferência Completa
+
+que pode ser simplificada para:
+
+θ = 360 × (Raio da Base / Geratriz)
+
+A dedução foi construída a partir da compreensão da geometria do cone, sem recorrer a fórmulas prontas.
+
+---
+
+### Modelagem do domínio
+
+Foi consolidada a nova estrutura lógica do projeto:
+
+TrunkDimensions
+↓
+calculateFullCone()
+↓
+ConeDimensions
+↓
+calculateConeDevelopment()
+↓
+ConeDevelopment
+
+Essa organização separa claramente cada etapa da transformação geométrica.
+
+---
+
+### Melhorias na apresentação
+
+A saída do console foi reorganizada para facilitar a leitura durante os testes.
+
+Foi criado um pequeno relatório contendo:
+
+- dimensões do tronco;
+- raio interno;
+- raio externo;
+- ângulo da planificação.
+
+Além disso, os valores passaram a ser exibidos com duas casas decimais utilizando `toFixed(2)`.
+
+Exemplo:
+
+=================================
+
+    RKP3D Cone Label Generator
+
+=================================
+
+Input
+
+Top Diameter...... 35.50 mm
+Bottom Diameter... 32.00 mm
+Height............ 35.00 mm
+
+Cone Development
+
+Inner Radius...... 320.40 mm
+Outer Radius...... 355.44 mm
+Angle............. 17.98°
+
+---
+
+## Aprendizados
+
+Mais do que implementar novos cálculos, este ciclo consolidou a compreensão de como uma superfície tridimensional pode ser representada em um plano.
+
+A arquitetura do projeto também evoluiu, passando a organizar cada etapa como uma transformação independente, facilitando futuras expansões como geração de SVG e PDF.
+
+---
+
+## Próximos passos
+
+- Criar a estrutura responsável pela geração do SVG.
+- Transformar o ConeDevelopment em um desenho vetorial.
+- Visualizar pela primeira vez a planificação produzida pelo projeto.

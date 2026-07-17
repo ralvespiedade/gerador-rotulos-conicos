@@ -10,7 +10,7 @@ export function calculateDevelopment(cone: ConeDimensions): ConeDevelopment {
   
   const externalRadius = cone.geratrix
   const angle = cone.radius * 360 / cone.geratrix
-  
+    
   return {
     internalRadius,
     externalRadius,
