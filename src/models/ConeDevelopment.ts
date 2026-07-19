@@ -1,6 +1,6 @@
 export interface ConeDevelopment {
-  internalRadius: Number,
-  externalRadius: Number,
-  angle: Number
+  internalRadius: number,
+  externalRadius: number,
+  angle: number
 
 }

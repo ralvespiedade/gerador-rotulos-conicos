@@ -5,9 +5,9 @@ import { generateSVG } from "./svg/generator.js"
 import { writeFileSync } from "node:fs"
 
 const trunk: TrunkDimensions = {
-  topDiameter: 35.5,
-  bottomDiameter: 32,
-  height: 35,
+  topDiameter: 38.294,
+  bottomDiameter: 35.235,
+  height: 35.31
 }
 
 const cone = calculateCone(trunk)
