@@ -12,6 +12,14 @@ Equipe
 - Ezequiel
 - Frederico
 
+## Acknowledgements
+
+This project has benefited from discussions and contributions from the open-source community.
+
+Special thanks to:
+
+- @HaimiyaWasn — first SVG generation proposal (PR #2), which became valuable study material during the project's development.
+
 ## Tecnologias
 
 - TypeScript

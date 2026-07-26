@@ -635,3 +635,299 @@ A arquitetura do projeto também evoluiu, passando a organizar cada etapa como u
 - Criar a estrutura responsável pela geração do SVG.
 - Transformar o ConeDevelopment em um desenho vetorial.
 - Visualizar pela primeira vez a planificação produzida pelo projeto.
+
+# Diário de Bordo — 17/07/2026
+
+## Objetivo do dia
+
+Iniciar a geração do arquivo SVG que representará a planificação do tronco de cone.
+
+---
+
+## O que foi desenvolvido
+
+* Criada a estrutura inicial do módulo `svg/`.
+* Implementada a função `generateSVG()`, responsável por retornar uma string contendo um documento SVG.
+* Estudo da biblioteca nativa `node:fs`, entendendo como gravar arquivos utilizando `writeFileSync()`.
+* Primeiros testes renderizando um círculo em SVG para validar o fluxo completo:
+
+  * TypeScript → SVG → Navegador.
+
+---
+
+## Aprendizados
+
+* O SVG nada mais é do que um documento XML.
+* O navegador interpreta esse documento e desenha suas primitivas gráficas.
+* O Node.js já fornece recursos nativos para criação de arquivos, dispensando bibliotecas externas.
+
+---
+
+## Marcos importantes
+
+* Primeira geração automática de um SVG pelo projeto.
+* Criação da primeira Issue pública do projeto:
+  **Implementar geração do SVG.**
+* O projeto recebeu sua primeira Pull Request de um colaborador da comunidade no GitHub.
+
+---
+
+## Próximos passos
+
+* Estudar geometria computacional aplicada ao SVG.
+* Compreender como desenhar linhas e arcos.
+* Evoluir do desenho de círculos para a planificação completa do tronco de cone.
+
+
+# Diário de Bordo — 18/07/2026
+
+## Objetivo do dia
+
+Compreender a matemática necessária para desenhar a planificação utilizando coordenadas cartesianas.
+
+---
+
+## O que foi desenvolvido
+
+* Conversão de ângulos de graus para radianos.
+* Primeiros experimentos utilizando:
+
+  * `Math.sin()`
+  * `Math.cos()`
+* Cálculo das coordenadas de um ponto pertencente a uma circunferência.
+* Desenho da primeira linha radial do SVG.
+
+---
+
+## Aprendizados
+
+Hoje ocorreu um dos maiores aprendizados do projeto.
+
+Até então seno e cosseno eram apenas fórmulas decoradas durante a escola.
+
+Durante os experimentos ficou claro que:
+
+* `cos()` determina a posição horizontal (X);
+* `sin()` determina a posição vertical (Y).
+
+Também foi compreendido por que:
+
+* 0° aponta para a direita;
+* 90° aponta para cima;
+* a conversão para coordenadas cartesianas acontece naturalmente através dessas funções.
+
+Foi possível perceber a diferença entre:
+
+* coordenadas polares (raio + ângulo);
+* coordenadas cartesianas (X,Y).
+
+---
+
+## Marcos importantes
+
+* Primeira linha desenhada matematicamente.
+* Início da compreensão da utilidade prática da trigonometria.
+
+---
+
+## Próximos passos
+
+* Estudar o elemento `<path>`.
+* Construir a planificação utilizando arcos em vez de circunferências completas.
+
+# Diário de Bordo — 19/07/2026
+
+## Objetivo do dia
+
+Construir a primeira versão da planificação completa utilizando o elemento `<path>` do SVG.
+
+---
+
+## O que foi desenvolvido
+
+* Calculadas as coordenadas:
+
+  * Inner Start
+  * Outer Start
+  * Outer End
+  * Inner End
+* Estudo do comando `<path>`.
+* Compreensão dos comandos:
+
+  * `M` (Move)
+  * `L` (Line)
+  * `A` (Arc)
+* Construída a primeira sequência completa da planificação:
+
+```
+M → L → A → L → A
+```
+
+resultando no primeiro setor anular do projeto.
+
+---
+
+## Aprendizados
+
+Foi compreendido que o algoritmo da planificação pode ser descrito de forma independente da linguagem de programação:
+
+1. Começar em `InnerStart`;
+2. Traçar uma reta até `OuterStart`;
+3. Fazer um arco até `OuterEnd`;
+4. Traçar uma reta até `InnerEnd`;
+5. Fazer um arco retornando para `InnerStart`.
+
+Também ficou claro que o SVG funciona como uma linguagem de descrição de desenhos, enquanto a trigonometria é responsável apenas por calcular os pontos utilizados pelo SVG.
+
+---
+
+## Marcos importantes
+
+* Primeira planificação funcional gerada pelo projeto.
+* Primeira visualização do molde do tronco de cone no navegador.
+* Consolidação do entendimento sobre seno, cosseno e coordenadas cartesianas.
+* Início do estudo da Pull Request enviada pelo primeiro colaborador externo do projeto.
+
+---
+
+## Decisão de Engenharia de Software
+
+Optou-se por interromper temporariamente novas implementações relacionadas ao gerador de SVG para estudar cuidadosamente a contribuição enviada pelo colaborador **Haimiya**.
+
+A intenção é compreender sua solução, realizar uma revisão criteriosa e, caso aprovada, incorporar seu trabalho ao projeto, preservando o mérito da primeira implementação pública dessa funcionalidade.
+
+Essa decisão reforça o compromisso do projeto com as boas práticas de colaboração em software livre.
+
+---
+
+## Próximos passos
+
+* Revisar a Pull Request linha por linha.
+* Entender as decisões arquiteturais adotadas.
+* Aprender novas técnicas de SVG antes da integração ao projeto.
+
+# Diário de Bordo - 20/07/2026
+
+## Estudando antes de implementar
+
+Hoje tomei uma decisão importante para o projeto.
+
+Percebi que seria mais valioso estudar cuidadosamente a implementação enviada na Pull Request do que simplesmente incorporá-la.
+
+Quero compreender completamente cada conceito antes de adicioná-lo ao projeto.
+
+Também atualizamos o Diário de Bordo e conversamos bastante sobre a importância de construir um histórico de aprendizado, e não apenas um histórico de código.
+
+# Diário de Bordo - 21/07/2026
+
+## Aprendendo a revisar código
+
+Hoje iniciamos a leitura detalhada da Pull Request.
+
+Foi a primeira vez que participei de uma revisão de código como mantenedor de um projeto.
+
+Aprendi que uma Code Review não consiste em procurar erros.
+
+Ela consiste em compreender a intenção do autor, avaliar a organização da solução e pensar em possíveis melhorias futuras.
+
+Também gostei muito da ideia de extrair responsabilidades para funções pequenas e reutilizáveis.
+
+# Diário de Bordo - 22/07/2026
+
+## O verdadeiro significado do centro
+
+Hoje finalmente compreendi por que precisamos informar o centro do círculo.
+
+Durante vários dias eu enxergava apenas coordenadas X e Y.
+
+Agora entendi que o seno e o cosseno calculam apenas deslocamentos.
+
+Quem transforma esses deslocamentos em posições reais é justamente o centro do círculo.
+
+Foi um daqueles momentos em que tudo fez sentido.
+
+Mais um grande "click".
+
+# Diário de Bordo - 23/07/2026
+
+## Consolidando o entendimento
+
+Hoje fiz diversos exercícios utilizando valores reais para verificar os cálculos.
+
+Ver os números substituindo as letras tornou tudo muito mais intuitivo.
+
+Também percebi que estava começando a pensar geometricamente, imaginando os deslocamentos antes mesmo de executar o código.
+
+Foi um avanço importante na minha confiança.
+
+# Diário de Bordo - 24/07/2026
+
+## Modelando melhor o projeto
+
+Hoje estudamos como representar melhor os conceitos do domínio.
+
+Ao invés de trabalhar apenas com números soltos, começamos a pensar em objetos que representam pontos.
+
+Também iniciamos uma discussão interessante sobre modelagem de dados, avaliando quando faz sentido criar novas interfaces.
+
+Além disso, aprofundamos bastante o estudo do comando Arc do SVG e entendemos o significado dos parâmetros:
+
+- raio
+- largeArcFlag
+- sweepFlag
+
+A geometria por trás do SVG começou a ficar muito mais natural.
+
+# Diário de Bordo - 25/07/2026
+
+## Muito além do código
+
+Hoje foi um daqueles dias especiais.
+
+Além dos estudos técnicos, refletimos sobre a própria jornada de aprendizado.
+
+Percebi como minha forma de estudar mudou.
+
+Antes eu me frustrava quando não compreendia um conceito imediatamente.
+
+Hoje consigo deixar a ideia "descansar", voltar no dia seguinte e perceber que ela já encontrou seu lugar dentro da minha compreensão.
+
+Também refletimos sobre como o projeto deixou de ser apenas um Gerador de Rótulos.
+
+Ele passou a representar meu retorno à programação, ao estudo da matemática e ao desenvolvimento pessoal.
+
+Foi um dia extremamente marcante.
+
+# Diário de Bordo - 26/07/2026
+
+## A primeira grande refatoração
+
+Hoje realizamos uma das refatorações mais importantes do projeto.
+
+Criamos a função `polarToCartesian()`, responsável por converter coordenadas polares em coordenadas cartesianas.
+
+Mais importante do que criar a função foi validar cuidadosamente seu comportamento.
+
+Implementei uma comparação entre o algoritmo antigo e a nova implementação, verificando ponto a ponto:
+
+- outerStart
+- outerEnd
+- innerStart
+- innerEnd
+
+Durante os testes encontrei diferenças.
+
+Ao invés de alterar o código aleatoriamente, investiguei a causa.
+
+Descobri dois problemas:
+
+- o eixo Y precisava respeitar o sistema de coordenadas do SVG;
+- eu estava convertendo o ângulo para radianos duas vezes.
+
+Depois das correções, todas as coordenadas passaram a produzir exatamente os mesmos resultados.
+
+Foi a primeira vez que senti estar realizando uma refatoração profissional.
+
+Também discutimos como reconhecer contribuições da comunidade open source e concluímos que agradecer colaboradores no README é uma forma elegante de preservar esse reconhecimento.
+
+Encerramos o dia planejando uma organização melhor dos commits e das próximas missões do projeto.
