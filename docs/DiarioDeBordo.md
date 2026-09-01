@@ -931,3 +931,23 @@ Foi a primeira vez que senti estar realizando uma refatoração profissional.
 Também discutimos como reconhecer contribuições da comunidade open source e concluímos que agradecer colaboradores no README é uma forma elegante de preservar esse reconhecimento.
 
 Encerramos o dia planejando uma organização melhor dos commits e das próximas missões do projeto.
+
+# Diário de Bordo - 10/08/2026
+
+# Refatoração e validação visual
+
+Retomamos o Gerador de Rótulos após alguns dias dedicados às demandas da RKP3D. A função generateSVG() foi refatorada, eliminando variáveis obsoletas e utilizando diretamente os pontos retornados por polarToCartesian(). A função polarToCartesian() também foi reorganizada para o módulo geometry, refletindo melhor sua responsabilidade.
+
+Durante a validação visual, foi identificado um comportamento inesperado na orientação do arco interno. Após analisar a direção do sweep e alterar seu valor, o desenho passou a representar corretamente a geometria esperada. O episódio reforçou a importância de validar não apenas os valores calculados, mas também o significado geométrico do resultado produzido.
+
+# Diário de Bordo - 01/09/2026
+
+# Aceleração de rumo e incorporação conceitual do PR #2
+
+O projeto mudou de dinâmica: a prioridade passou a ser concluir entregas funcionais com ciclos curtos de implementação, validação e commits, sem abandonar a clareza construída durante a fase de estudo.
+
+Revisitamos o antigo PR #2 de @HaimiyaWasn e incorporamos suas ideias úteis à arquitetura atual, sem copiar a implementação literalmente. Mantivemos o contorno do rótulo em um único `path` fechado e reutilizamos o helper `polarToCartesian()` do módulo de geometria. A contribuição inspirou a centralização simétrica do setor, o tamanho dinâmico do SVG, a inclusão do `viewBox` e o cálculo do `large-arc-flag` conforme o ângulo.
+
+Os arcos externo e interno agora usam sentidos opostos para formar corretamente o contorno, inclusive quando o setor ultrapassa 180 graus. O SVG também declara dimensões físicas em milímetros, preservando a relação entre a matemática e a impressão do rótulo.
+
+Para sustentar o novo ritmo, adicionamos testes automatizados para a conversão polar, o enquadramento dinâmico, as flags dos arcos e entradas inválidas, além de uma checagem explícita do TypeScript. A implementação foi validada com `npm test`, `npm run check` e `npm run dev`.
