@@ -1,5 +1,5 @@
 import type { Point } from "../models/Point.js";
-import { angleToRadianConverter } from "./angleToRadian.js";
+import { angleToRadianConverter } from "../utils/angleToRadian.js";
 
 export function polarToCartesian(center: Point, radius: number, angle: number ): Point {
   

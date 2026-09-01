@@ -1,83 +1,58 @@
 import type { ConeDevelopment } from "../models/ConeDevelopment.js"
 import type { Point } from "../models/Point.js"
-import { angleToRadianConverter } from "../utils/angleToRadian.js"
-import { polarToCartesian } from "../utils/polarToCartesian.js"
+import { polarToCartesian } from "../geometry/polarToCartesian.js"
+
+const SVG_MARGIN = 10
+const STROKE_WIDTH = 0.5
 
 export function generateSVG(development: ConeDevelopment): string {
-  
-  const startAngle = angleToRadianConverter(0)
-  const endAngle = angleToRadianConverter(development.angle)
-  
-  const centerX = 450
-  const centerY = 450
-  
-  const center: Point = {
-    x: 450,
-    y: 450
-  }
+  validateDevelopment(development)
 
-  const outerStart = polarToCartesian(center, development.externalRadius, 0)
-  const outerEnd = polarToCartesian(center, development.externalRadius, development.angle)
-  const innerStart = polarToCartesian(center, development.internalRadius, 0)
-  const innerEnd = polarToCartesian(center, development.internalRadius, development.angle)
-  
-  const outerStartX = centerX + development.externalRadius * Math.cos(startAngle)
-  const outerStartY = centerY - development.externalRadius * Math.sin(startAngle)
-  const outerEndX = centerX + development.externalRadius * Math.cos(endAngle)
-  const outerEndY = centerY - development.externalRadius * Math.sin(endAngle)
-  
-  const innerStartX = centerX + development.internalRadius * Math.cos(startAngle)
-  const innerStartY = centerY - development.internalRadius * Math.sin(startAngle)
-  const innerEndX = centerX + development.internalRadius * Math.cos(endAngle)
-  const innerEndY = centerY - development.internalRadius * Math.sin(endAngle)
-  
-  //testes:
-  console.log() 
-  console.log(`Comparando código antigo com o polarToCartesian`)
-  console.log(`              Resultado Anterior         Resultado Refatoração`)
-  console.log(`outerStart---(${outerStartX.toFixed(4)}, ${outerStartY.toFixed(4)})- - - - (${outerStart.x.toFixed(4)}, ${outerStart.y.toFixed(4)})`)
-  console.log(`outerEnd-----(${outerEndX.toFixed(4)}, ${outerEndY.toFixed(4)})- - - - (${outerEnd.x.toFixed(4)}, ${outerEnd.y.toFixed(4)})`)
-  console.log(`innerStart---(${innerStartX.toFixed(4)}, ${innerStartY.toFixed(4)})- - - - (${innerStart.x.toFixed(4)}, ${innerStart.y.toFixed(4)})`)
-  console.log(`innerEnd-----(${innerEndX.toFixed(4)}, ${innerEndY.toFixed(4)})- - - - (${innerEnd.x.toFixed(4)}, ${innerEnd.y.toFixed(4)})`)
-  console.log()
-  console.log('======> Debug de Valores de outerEnd e innerEnd <======')
-  console.log(`outerEndX - Centro: ${centerX}, Radius: ${development.externalRadius} e angle: ${endAngle}`)
-  console.log(`outerEnd.x - Centro: ${center.x}, Radius: ${development.externalRadius} e angle: ${angleToRadianConverter(development.angle)}`)
-  
+  const size = development.externalRadius * 2 + SVG_MARGIN * 2
+  const center: Point = {
+    x: size / 2,
+    y: size / 2
+  }
+  const startAngle = 90 - development.angle / 2
+  const endAngle = 90 + development.angle / 2
+  const outerStart = polarToCartesian(center, development.externalRadius, startAngle)
+  const outerEnd = polarToCartesian(center, development.externalRadius, endAngle)
+  const innerStart = polarToCartesian(center, development.internalRadius, startAngle)
+  const innerEnd = polarToCartesian(center, development.internalRadius, endAngle)
+  const largeArcFlag = development.angle > 180 ? 1 : 0
+
   return `
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="900"
-      height="900"
-    >
-    <path 
-      d="
-        
-        M ${innerStartX} ${innerStartY} 
-        L ${outerStartX} ${outerStartY} 
-        A
-          ${development.externalRadius}
-          ${development.externalRadius}
-          0
-          0
-          1
-          ${outerEndX}
-          ${outerEndY}
-        L ${innerEndX} ${innerEndY}
-        A
-          ${development.internalRadius}
-          ${development.internalRadius}
-          0
-          0
-          1
-          ${innerStartX}
-          ${innerStartY} 
-      " 
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="${size}mm"
+    height="${size}mm"
+    viewBox="0 0 ${size} ${size}"
+  >
+    <path
+      d="M ${innerStart.x} ${innerStart.y}
+         L ${outerStart.x} ${outerStart.y}
+         A ${development.externalRadius} ${development.externalRadius} 0 ${largeArcFlag} 0 ${outerEnd.x} ${outerEnd.y}
+         L ${innerEnd.x} ${innerEnd.y}
+         A ${development.internalRadius} ${development.internalRadius} 0 ${largeArcFlag} 1 ${innerStart.x} ${innerStart.y}
+         Z"
       stroke="blue"
-      stroke-width="2"
+      stroke-width="${STROKE_WIDTH}"
       fill="none"
     />
-      
-    </svg>
+  </svg>
   `
-} 
+}
+
+function validateDevelopment(development: ConeDevelopment): void {
+  const { internalRadius, externalRadius, angle } = development
+
+  if (![internalRadius, externalRadius, angle].every(Number.isFinite)) {
+    throw new RangeError("Development values must be finite numbers")
+  }
+  if (internalRadius < 0 || externalRadius <= internalRadius) {
+    throw new RangeError("The external radius must be greater than the internal radius")
+  }
+  if (angle <= 0 || angle >= 360) {
+    throw new RangeError("The development angle must be between 0 and 360 degrees")
+  }
+}
