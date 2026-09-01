@@ -7,7 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "tsx src/app.ts"
+    "dev": "tsx src/app.ts",
+    "check": "tsc --noEmit",
+    "test": "tsx --test src/**/*.test.ts"
   },
   "keywords": [],
   "author": "",
